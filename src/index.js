@@ -42,9 +42,9 @@ class Country extends React.Component {
 		return (
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3">
 				<div className="my-3 mx-1 p-1 bg-dark border border-dark rounded shadow text-lg text-white text-center border">
-					<h1 className="p-3 red text-lg bg-light-blue-grey shadow"><b>{this.props.name}</b></h1>
-					<p className="m-0 p-0 shadow text-white">
-						<b>Posición: <i>{this.props.children}</i></b>
+					<h1 className="p-3 red text-lg bg-deep-orange text-white shadow"><b>{this.props.name}</b></h1>
+					<p className="m-0 p-0 bg-light-lime text-dark">
+						<strong>Posición: <i>{this.props.children}</i></strong>
 						<br/>
 						<input type="checkbox" 
 								onChange={() => this.handleLike()} 
@@ -55,14 +55,16 @@ class Country extends React.Component {
 							<b className="text-default">Like:  </b><em>{String(this.state.like)}</em>
 						</span>
 					</p>
-					<hr className="w-100 my-2 p-0 bg-deep-orange"/>
-					<p className="m-0 p-0 pr-3 text-right">
-						<button type="button" onClick={()=>this.edit()}
-							  className="btn btn-outline-secondary glyphicon glyphicon-pencil green my-2">
-						</button>
-						<span onClick={()=>this.remove()}
-							  className="ml-3 glyphicon glyphicon-trash red my-2">
-						</span>						
+					<hr className="w-100 m-0 p-0 my-2 bg-deep-orange"/>
+					<p className="m-0 p-0 text-right">
+						<div class="btn-group m-0 mb-1 py-1 px-2">
+							<button type="button" onClick={()=>this.edit()}
+								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-pencil">
+							</button>
+							<button type="button" onClick={()=>this.remove()}
+								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-trash">
+							</button>		
+						</div>			
 					</p>
 				</div>
 			</div>
