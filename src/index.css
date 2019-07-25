@@ -1,59 +1,86 @@
-.glyphicon {
-  font-size: 18px;
-  cursor: pointer;
-  color: gray;
-}
-
-.glyphicon-refresh-animate {
-  -webkit-animation: spin2 .7s infinite linear;
-  animation: spin2 .7s infinite linear;
-}
-
-@-webkit-keyframes spin2 {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+  .glyphicon {
+    font-size: 18px;
+    cursor: pointer;
+    color: gray;
   }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+
+  .glyphicon-refresh-animate {
+    -webkit-animation: spin2 .7s infinite linear;
+    animation: spin2 .7s infinite linear;
   }
-}
 
-@Keyframes spin {
-from { transform: scale(1) rotate(0deg);}
-to { transform: scale(1) rotate(360deg);}
-}
+  input[type=checkbox]{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    border: none;
+    outline: 0;
+    color: gray;
+  }
 
-input[type=checkbox]{
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -o-appearance: none;
-  border: none;
-  outline: 0;
-  color: gray;
-}
+  input[type=checkbox]:focus{
+    outline: 0;
+  }
 
-input[type=checkbox]:focus{
-  outline: 0;
-}
+  input[type=checkbox]:checked{
+    color: red;
+  }
 
-input[type=checkbox]:checked{
-  color: red;
-}
+  .bg-light-deep-orange{
+    background-color: #FBE9E7;
+  }
 
-.red {
-  color: red;
-}
+  .bg-light-blue-grey{
+    background-color: #ECEFF1;
+  }
 
-.blue{
-  color: blue;
-}
+  .bg-light-lime{
+    background-color: #F1F8E9;
+  }
 
-.gray{
-  color: gray;
-}
+ .bg-deep-orange{
+    background-color: #BF360C;
+  }
 
-.green{
-  color: green;
-}
+  .bg-light-grey{
+    background-color: #ECEFF1;
+  }
+
+  .bg-brown{
+    background-color: #4E342E;
+  }
+
+
+  .red {
+    color: red;
+  }
+
+  .blue{
+    color: blue;
+  }
+
+  .gray{
+    color: gray;
+  }
+
+  .green{
+    color: green;
+  }
+
+
+  .loader-item{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 50px !important;
+    height: 40px !important;
+
+/*    background-color:#26282f;*/
+    position:relative;
+/*    cursor:pointer;
+    border:1px solid #313238;*/
+  }
+  .loader-item:hover 

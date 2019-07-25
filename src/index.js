@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ClassicSpinner } from "react-spinners-kit";
 import 'bootstrap/dist/css/bootstrap.css';
 import '../src/index.css';
 
@@ -41,11 +42,10 @@ class Country extends React.Component {
 		return (
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3">
 				<div className="my-3 mx-1 p-1 bg-dark border border-dark rounded shadow text-lg text-white text-center border">
-					<h1 className="p-3 bg-white red text-sm rounded shadow"><b>{this.props.name}</b></h1>
-					<p className="p-2 bg-success text text-lg text-white rounded">
+					<h1 className="p-3 red text-lg bg-light-blue-grey shadow"><b>{this.props.name}</b></h1>
+					<p className="m-0 p-0 shadow text-white">
 						<b>Posición: <i>{this.props.children}</i></b>
-					</p>
-					<p className="m-0 p-0 bg-dark">
+						<br/>
 						<input type="checkbox" 
 								onChange={() => this.handleLike()} 
 								defaultChecked = {Boolean(this.state.like)}
@@ -55,13 +55,13 @@ class Country extends React.Component {
 							<b className="text-default">Like:  </b><em>{String(this.state.like)}</em>
 						</span>
 					</p>
-					<hr className="w-100 my-2 p-0 bg-success"/>
-					<p className="m-0 mr-3 text-right">
-						<span onClick={()=>this.edit()}
-							  className="glyphicon glyphicon-pencil blue my-2">
-						</span>
+					<hr className="w-100 my-2 p-0 bg-deep-orange"/>
+					<p className="m-0 p-0 pr-3 text-right">
+						<button type="button" onClick={()=>this.edit()}
+							  className="btn btn-outline-secondary glyphicon glyphicon-pencil green my-2">
+						</button>
 						<span onClick={()=>this.remove()}
-							  className="ml-3 glyphicon glyphicon-trash green my-2">
+							  className="ml-3 glyphicon glyphicon-trash red my-2">
 						</span>						
 					</p>
 				</div>
@@ -95,23 +95,23 @@ class Country extends React.Component {
 	}
 };
 
-	      	// countries : [
-	      	// 	'Venezuela',
-	      	// 	'Colombia',
-	      	// 	'Argentína',
-	      	// 	'Bolívia',
-	      	// 	'Chile',
-	      	// 	'Perú',
-	      	// 	'Brazil'
-	      	// ]
+// countries : [
+// 	'Venezuela',
+// 	'Colombia',
+// 	'Argentína',
+// 	'Bolívia',
+// 	'Chile',
+// 	'Perú',
+// 	'Brazil'
+// ]
+
 class World extends React.Component {
 	constructor(props) {
 		super(props);		
 		this.eachItem = this.eachItem.bind(this);
 		this.state = {
 	      	countries : [],
-	      	spinnerOn : "glyphicon glyphicon-refresh",      	
-	      	spinnerOff : "glyphicon glyphicon-refresh glyphicon-refresh-animate"
+	      	loading : false	   
 	    }
 	}
 
@@ -121,20 +121,25 @@ class World extends React.Component {
 		var country;
 		var self = this;
 
+		this.setState({
+			loading : true
+		});  
+
         fetch('https://restcountries.eu/rest/v1/all')
         .then(res => res.json())
         .then((data) => {
         	for (country in data){
         		self.add(data[country].name)
-        	}
-         	document.getElementById("spi").classList.add('glyphicon-refresh-animate');
+        	}  
+			this.setState({
+				loading : false
+			});        		
         })
-        .catch(console.log)
+        .catch(console.log);
     }	
     //after page load
-	componentDidMount() {		
-		document.getElementById("spi").classList.remove('glyphicon-refresh-animate');
-	}
+	componentDidMount() {	
+	}	
 
 	add(newCountry){
 		
@@ -197,16 +202,15 @@ class World extends React.Component {
 	}
 
 	render() { 
+		const { loading } = Boolean(this.state.loading);
 		return (
-			<div className="container container-fluid">
-				<header className="my-5 mx-0 bg-warning border border-dark shadow rounded text text-lg text-center">
-					<h1>World's Countries</h1>
-					<i className="mt-3"><b>Total : </b>{this.state.countries.length}</i>
+			<div className="m-0 p-0 text-white">
+				<header className="m-0 p-3 bg-deep-orange border-0 border-bottom-2 border-white shadow rounded-0 text text-lg text-center">
+					<h1><b>World's Countries</b></h1>
 					<br/>
-					<span className="mt-5 text text-xl" ref="spinner" id="spi"
-						className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+					<i className="mt-3"><b>Total : </b>{this.state.countries.length}</i>
 				</header>
-				<div className="input-group">
+				<div className="input-group m-0 mt-3 p-3">
 					<input type="text" ref="newCountryName" 
 							onKeyPress={(e)=> this.handleKeyDown(e)}  
 							className="form-control" 
@@ -222,6 +226,9 @@ class World extends React.Component {
 					{
 						this.state.countries.map(this.eachItem)
 					}
+				</div>
+				<div className="loader-item">				
+					<ClassicSpinner  size={40} color="#212121" loading={Boolean(this.state.loading)} />
 				</div>
 			</div>
 		)

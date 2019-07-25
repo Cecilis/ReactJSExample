@@ -1,0 +1,2 @@
+npm install --save react-spinners-kit
+npm install styled-components --save
