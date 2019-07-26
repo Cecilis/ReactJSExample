@@ -26,6 +26,7 @@
     color: red;
   }
 
+
   .bg-light-deep-orange{
     background-color: #FBE9E7;
   }
@@ -38,8 +39,15 @@
     background-color: #F1F8E9;
   }
 
- .bg-deep-orange{
-    background-color: #BF360C;
+ .bg-deep-green{
+    /*background-color: #BF360C;
+    background-color: #004D40;*/
+    background-color: #1B5E20;
+  }
+
+  .bg-fondo{
+    /*background-color: #BF360C;*/
+    background-color: #212121;
   }
 
   .bg-light-grey{

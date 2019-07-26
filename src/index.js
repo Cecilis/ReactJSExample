@@ -21,18 +21,23 @@ class Country extends React.Component {
 	showEditingView(){
 		return (
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3">
-				<div className="my-3 mx-1 p-1 bg-dark border border-dark rounded shadow text-lg text-white text-center border">
-					<input type="text" ref="newCountryName"   
-							className="form-control" placeholder={this.props.name}/>				
-					<hr className="w-100 my-1 p-0 bg-success"/>
-					<p className="m-0 mr-3 text-right">
-						<span onClick={()=>this.save()}
-							  className="glyphicon glyphicon-ok-circle blue my-2">
-						</span>
-						<span onClick={()=>this.cancel()}
-							  className="ml-3 glyphicon glyphicon-remove-circle red my-2">
-						</span>						
-					</p>
+				<div className="my-3 mx-1 p-1 bg-fondo border border-dark rounded shadow text-lg text-white text-center border">
+					<h1 className="p-3 red text-lg bg-deep-green text-white shadow"><b>{this.props.name}</b></h1>
+					<div className="m-0 p-0 bg-light-lime text-dark">
+						<input type="text" ref="newCountryName"   
+								className="form-control text-lg my-3" placeholder={this.props.name}/>				
+					</div>
+					<hr className="w-100 m-0 p-0 my-2 bg-white"/>
+					<div className="m-0 p-0 text-right">
+						<div className="btn-group m-0 mb-1 py-1 px-2">	
+							<button type="button" onClick={()=>this.save()}
+								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-ok-circle">
+							</button>
+							<button type="button" onClick={()=>this.cancel()}
+								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-remove-circle">
+							</button>							
+						</div>
+					</div>
 				</div>				
 			</div>
 		)
@@ -41,9 +46,9 @@ class Country extends React.Component {
 	showFinalView(){
 		return (
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3">
-				<div className="my-3 mx-1 p-1 bg-dark border border-dark rounded shadow text-lg text-white text-center border">
-					<h1 className="p-3 red text-lg bg-deep-orange text-white shadow"><b>{this.props.name}</b></h1>
-					<p className="m-0 p-0 bg-light-lime text-dark">
+				<div className="my-3 mx-1 p-1 bg-fondo border border-dark rounded shadow text-lg text-white text-center border">
+					<h1 className="p-3 red text-lg bg-deep-green text-white shadow"><b>{this.props.name}</b></h1>
+					<div className="m-0 p-0 bg-light-lime text-dark">
 						<strong>Posición: <i>{this.props.children}</i></strong>
 						<br/>
 						<input type="checkbox" 
@@ -54,10 +59,10 @@ class Country extends React.Component {
 						<span className="my-2">
 							<b className="text-default">Like:  </b><em>{String(this.state.like)}</em>
 						</span>
-					</p>
-					<hr className="w-100 m-0 p-0 my-2 bg-deep-orange"/>
-					<p className="m-0 p-0 text-right">
-						<div class="btn-group m-0 mb-1 py-1 px-2">
+					</div>
+					<hr className="w-100 m-0 p-0 my-2 bg-white"/>
+					<div className="m-0 p-0 text-right">
+						<div className="btn-group m-0 mb-1 py-1 px-2">
 							<button type="button" onClick={()=>this.edit()}
 								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-pencil">
 							</button>
@@ -65,7 +70,7 @@ class Country extends React.Component {
 								  className="btn btn-sm btn-success border border-dark shadow text-white glyphicon glyphicon-trash">
 							</button>		
 						</div>			
-					</p>
+					</div>
 				</div>
 			</div>
 		);		
@@ -130,6 +135,9 @@ class World extends React.Component {
         fetch('https://restcountries.eu/rest/v1/all')
         .then(res => res.json())
         .then((data) => {
+
+        	console.log(data);
+
         	for (country in data){
         		self.add(data[country].name)
         	}  
@@ -207,23 +215,23 @@ class World extends React.Component {
 		const { loading } = Boolean(this.state.loading);
 		return (
 			<div className="m-0 p-0 text-white">
-				<header className="m-0 p-3 bg-deep-orange border-0 border-bottom-2 border-white shadow rounded-0 text text-lg text-center">
+				<header className="m-0 p-3 bg-deep-green border-0 border-bottom-2 border-white shadow rounded-0 text text-lg text-center">
 					<h1><b>World's Countries</b></h1>
 					<br/>
 					<i className="mt-3"><b>Total : </b>{this.state.countries.length}</i>
 				</header>
-				<div className="input-group m-0 mt-3 p-3">
+				<div className="input-group input-group-lg m-0 mt-3 p-3">
 					<input type="text" ref="newCountryName" 
 							onKeyPress={(e)=> this.handleKeyDown(e)}  
 							className="form-control" 
-							placeholder="Write a name for the new country"/>
-					<span className="input-group-btn mr-3">
-						<div className="btn btn-default btn-success"
+							placeholder="To add a new country just write a name"/>
+					<div className="input-group-prepend mr-3">
+						<button type="button" className="btn btn-default btn-lg btn-success"
 							 onClick={() => this.add()} >
-							 +
-						</div>
-					</span>
-				</div>				
+							 <b>+</b>
+						</button>
+					</div>
+				</div>	
 				<div className="row">
 					{
 						this.state.countries.map(this.eachItem)
